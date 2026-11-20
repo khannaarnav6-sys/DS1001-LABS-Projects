@@ -1,0 +1,14 @@
+{
+  "prompt": "For a binary movie-score classifier, can demographic parity ratio equal 1 while equalized odds ratio is below 1? Give a two-group confusion-matrix example, calculate both ratios using Fairlearn’s default between-groups definitions, and explain what this means for allocating movie advertising budgets.",
+  "clarification": "Hello Data Science Student! Before I work through the example, what have you tried so far, or what part of Fairlearn’s default ratio definitions is confusing?",
+  "followup": "i get they compare different rates but how can selection be equal and the errors be different? can u show a small example",
+  "response_intro": "Hello Data Science Student! Yes. Selection rate is the share predicted positive; true-positive rate (TPR) is the share of actual positives correctly identified; false-positive rate (FPR) is the share of actual negatives incorrectly labeled positive.",
+  "response_context": "Suppose “positive” means the classifier recommends advertising a movie. Each cell below is a movie count, with rows as actual outcome and columns as predicted outcome:",
+  "response_table": [["Group", "Actual success, predicted yes", "Actual success, predicted no", "Actual not success, predicted yes", "Actual not success, predicted no"], ["A", 40, 10, 10, 40], ["B", 20, 30, 30, 20]],
+  "response_paragraphs": [
+    "Both groups have 50 predicted “yes” out of 100, so their selection rates are each 0.5. Fairlearn’s default between-groups demographic parity ratio—the smaller selection rate divided by the larger—is therefore 0.5 / 0.5 = 1.",
+    "But their error rates differ: Group A has TPR 40/50 = 0.8 and FPR 10/50 = 0.2; Group B has TPR 20/50 = 0.4 and FPR 30/50 = 0.6. Fairlearn’s default between-groups equalized odds ratio takes the worse of the TPR and FPR ratios: min(0.4/0.8, 0.2/0.6) = min(0.5, 0.33) ≈ 0.33.",
+    "So both groups get the same share of movies recommended for ads, but the recommendations are less accurate for Group B: with the same spend per recommended movie, more ads go to movies that don’t succeed, and more successful movies are missed. Equal selection rates alone don’t guarantee equally effective budget allocation."
+  ],
+  "provenance": "Copilot exchange pasted by the user on November 20, 2026. Tool-wrapper text omitted; response wording retained, with Markdown emphasis removed for layout."
+}

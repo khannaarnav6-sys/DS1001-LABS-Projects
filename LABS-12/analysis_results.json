@@ -1,0 +1,374 @@
+{
+  "best_k": 15,
+  "train_n": 8041,
+  "test_n": 2011,
+  "overall": {
+    "true positive rate": 0.6973684210526315,
+    "false positive rate": 0.2844574780058651,
+    "selection rate": 0.48731974142217804,
+    "count": 2011.0,
+    "accuracy": 0.7066136250621581
+  },
+  "confusion": {
+    "TN": 732,
+    "FP": 291,
+    "FN": 299,
+    "TP": 689
+  },
+  "groups": [
+    {
+      "category": "country",
+      "group": 0,
+      "n": 1011,
+      "TP": 277,
+      "FN": 160,
+      "FP": 128,
+      "TN": 446,
+      "TPR": 0.6338672768878718,
+      "FPR": 0.2229965156794425,
+      "selection_rate": 0.40059347181008903
+    },
+    {
+      "category": "country",
+      "group": 1,
+      "n": 1000,
+      "TP": 412,
+      "FN": 139,
+      "FP": 163,
+      "TN": 286,
+      "TPR": 0.7477313974591652,
+      "FPR": 0.36302895322939865,
+      "selection_rate": 0.575
+    },
+    {
+      "category": "top_lang",
+      "group": 0,
+      "n": 533,
+      "TP": 220,
+      "FN": 75,
+      "FP": 84,
+      "TN": 154,
+      "TPR": 0.7457627118644068,
+      "FPR": 0.35294117647058826,
+      "selection_rate": 0.5703564727954972
+    },
+    {
+      "category": "top_lang",
+      "group": 1,
+      "n": 1478,
+      "TP": 469,
+      "FN": 224,
+      "FP": 207,
+      "TN": 578,
+      "TPR": 0.6767676767676768,
+      "FPR": 0.26369426751592356,
+      "selection_rate": 0.45737483085250336
+    },
+    {
+      "category": "top_genre",
+      "group": 0,
+      "n": 1638,
+      "TP": 486,
+      "FN": 258,
+      "FP": 222,
+      "TN": 672,
+      "TPR": 0.6532258064516129,
+      "FPR": 0.2483221476510067,
+      "selection_rate": 0.43223443223443225
+    },
+    {
+      "category": "top_genre",
+      "group": 1,
+      "n": 373,
+      "TP": 203,
+      "FN": 41,
+      "FP": 69,
+      "TN": 60,
+      "TPR": 0.8319672131147541,
+      "FPR": 0.5348837209302325,
+      "selection_rate": 0.7292225201072386
+    }
+  ],
+  "ratios": {
+    "country": {
+      "DPR": 0.6966842988001549,
+      "EOR": 0.614266475705949
+    },
+    "top_lang": {
+      "DPR": 0.8019104764617905,
+      "EOR": 0.7471337579617834
+    },
+    "top_genre": {
+      "DPR": 0.5927332471450119,
+      "EOR": 0.46425444995623
+    }
+  },
+  "representation": {
+    "country": [
+      {
+        "class": "AU",
+        "count": 4880,
+        "percent": 48.5475527258257
+      },
+      {
+        "class": "US",
+        "count": 2716,
+        "percent": 27.01949860724234
+      },
+      {
+        "class": "other",
+        "count": 709,
+        "percent": 7.053322721846398
+      },
+      {
+        "class": "JP",
+        "count": 502,
+        "percent": 4.994031038599283
+      },
+      {
+        "class": "KR",
+        "count": 358,
+        "percent": 3.561480302427378
+      },
+      {
+        "class": "FR",
+        "count": 219,
+        "percent": 2.1786709112614404
+      },
+      {
+        "class": "GB",
+        "count": 172,
+        "percent": 1.7111022682053323
+      },
+      {
+        "class": "ES",
+        "count": 151,
+        "percent": 1.5021886191802627
+      },
+      {
+        "class": "IT",
+        "count": 123,
+        "percent": 1.2236370871468365
+      },
+      {
+        "class": "HK",
+        "count": 120,
+        "percent": 1.193792280143255
+      },
+      {
+        "class": "MX",
+        "count": 102,
+        "percent": 1.014723438121767
+      }
+    ],
+    "top_genre": [
+      {
+        "class": "Drama",
+        "count": 1865,
+        "percent": 18.55352168722642
+      },
+      {
+        "class": "Action",
+        "count": 1563,
+        "percent": 15.549144448865897
+      },
+      {
+        "class": "Comedy",
+        "count": 1377,
+        "percent": 13.698766414643853
+      },
+      {
+        "class": "Horror",
+        "count": 931,
+        "percent": 9.26183844011142
+      },
+      {
+        "class": "Animation",
+        "count": 885,
+        "percent": 8.804218066056507
+      },
+      {
+        "class": "Thriller",
+        "count": 577,
+        "percent": 5.740151213688818
+      },
+      {
+        "class": "Adventure",
+        "count": 571,
+        "percent": 5.680461599681656
+      },
+      {
+        "class": "Romance",
+        "count": 413,
+        "percent": 4.108635097493036
+      },
+      {
+        "class": "Crime",
+        "count": 371,
+        "percent": 3.6908077994428967
+      },
+      {
+        "class": "Family",
+        "count": 333,
+        "percent": 3.312773577397533
+      },
+      {
+        "class": "Science Fiction",
+        "count": 313,
+        "percent": 3.113808197373657
+      },
+      {
+        "class": "Fantasy",
+        "count": 263,
+        "percent": 2.6163947473139673
+      },
+      {
+        "class": "Documentary",
+        "count": 176,
+        "percent": 1.7508953442101074
+      },
+      {
+        "class": "Mystery",
+        "count": 108,
+        "percent": 1.0744130521289295
+      },
+      {
+        "class": "War",
+        "count": 77,
+        "percent": 0.766016713091922
+      },
+      {
+        "class": "Music",
+        "count": 76,
+        "percent": 0.7560684440907283
+      },
+      {
+        "class": "Western",
+        "count": 72,
+        "percent": 0.716275368085953
+      },
+      {
+        "class": "History",
+        "count": 46,
+        "percent": 0.45762037405491446
+      },
+      {
+        "class": "TV Movie",
+        "count": 35,
+        "percent": 0.34818941504178275
+      }
+    ],
+    "top_lang": [
+      {
+        "class": "English",
+        "count": 7381,
+        "percent": 73.42817349781139
+      },
+      {
+        "class": "Japanese",
+        "count": 675,
+        "percent": 6.71508157580581
+      },
+      {
+        "class": "Spanish",
+        "count": 388,
+        "percent": 3.8599283724631914
+      },
+      {
+        "class": "Korean",
+        "count": 384,
+        "percent": 3.820135296458416
+      },
+      {
+        "class": "French",
+        "count": 282,
+        "percent": 2.8054118583366496
+      },
+      {
+        "class": "Chinese",
+        "count": 144,
+        "percent": 1.432550736171906
+      },
+      {
+        "class": "Italian",
+        "count": 142,
+        "percent": 1.4126541981695184
+      },
+      {
+        "class": "Cantonese",
+        "count": 141,
+        "percent": 1.4027059291683248
+      },
+      {
+        "class": "German",
+        "count": 89,
+        "percent": 0.8853959411062475
+      },
+      {
+        "class": "other",
+        "count": 72,
+        "percent": 0.716275368085953
+      },
+      {
+        "class": "Russian",
+        "count": 65,
+        "percent": 0.6466374850775966
+      },
+      {
+        "class": "Tagalog",
+        "count": 42,
+        "percent": 0.4178272980501393
+      },
+      {
+        "class": "Portuguese",
+        "count": 35,
+        "percent": 0.34818941504178275
+      },
+      {
+        "class": "Thai",
+        "count": 33,
+        "percent": 0.32829287703939514
+      },
+      {
+        "class": "Norwegian",
+        "count": 29,
+        "percent": 0.28849980103462
+      },
+      {
+        "class": "Polish",
+        "count": 26,
+        "percent": 0.2586549940310386
+      },
+      {
+        "class": "Hindi",
+        "count": 26,
+        "percent": 0.2586549940310386
+      },
+      {
+        "class": "Danish",
+        "count": 23,
+        "percent": 0.22881018702745723
+      },
+      {
+        "class": "Swedish",
+        "count": 22,
+        "percent": 0.21886191802626342
+      },
+      {
+        "class": "Dutch",
+        "count": 21,
+        "percent": 0.20891364902506965
+      },
+      {
+        "class": "Turkish",
+        "count": 21,
+        "percent": 0.20891364902506965
+      },
+      {
+        "class": "Indonesian",
+        "count": 11,
+        "percent": 0.10943095901313171
+      }
+    ]
+  }
+}

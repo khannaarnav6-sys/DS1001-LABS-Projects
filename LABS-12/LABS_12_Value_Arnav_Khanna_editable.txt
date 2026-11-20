@@ -1,0 +1,99 @@
+LABS-12: Value
+
+Arnav Khanna | DS1001 - Professor Wright | November 20, 2026
+
+Questions
+
+1. What the five metrics measure
+
+A positive prediction means a movie is predicted to earn a high score. TP means correctly predicted high; FP means actually low but predicted high; FN means actually high but predicted low; TN means correctly predicted low. N is the number of movies in the group being evaluated, and g stands for a group.
+
+True positive rate (TPR) = TP / (TP + FN). This is the fraction of genuinely high-scoring movies the model identifies. Its range is 0 to 1: 1 means all are found and 0 means none are found. Higher TPR means fewer potentially promising movies are overlooked. Equal TPR across groups means equal detection rates, but a single TPR value does not establish fairness.
+
+False positive rate (FPR) = FP / (FP + TN). This is the fraction of genuinely low-scoring movies incorrectly labeled high. Its range is 0 to 1: 0 means no false alarms and 1 means every low-scoring movie is labeled high. A higher FPR could direct advertising money toward more low-scoring movies. Equal FPR across groups means equal false-alarm rates; lower FPR alone does not prove fairness.
+
+Selection rate (SR) = (TP + FP) / N. This is the fraction of all movies predicted high, whether correct or incorrect. Its range is 0 to 1: 0 selects none and 1 selects all. If positive predictions guide spending, SR describes how often a group could receive that opportunity. Equal selection rates represent demographic parity; neither endpoint is inherently fair or unfair.
+
+Demographic parity ratio (DPR) = min(SRg) / max(SRg). Across the compared groups g, the ratio ranges from 0 to 1 when defined. A value of 1 means equal selection rates; 0 means one group is never selected while another is selected. Lower values indicate larger relative disparities in access to positive predictions, without accounting for actual scores.
+
+Equalized odds ratio (EOR) = min[min(TPRg)/max(TPRg), min(FPRg)/max(FPRg)]. Its defined range is 0 to 1. A value of 1 means equal detection and false-alarm rates; 0 is an extreme relative disparity in at least one rate. Lower values indicate less equal error behavior. Equal rates can still describe a poor model. Rates or ratios with zero denominators require special care.
+
+2. Representation in country, top_genre, and top_lang
+
+Category | Most prevalent class | All other classes
+country | AU: 4,880 (48.55%) | 5,172 (51.45%)
+top_genre | Drama: 1,865 (18.55%) | 8,187 (81.45%)
+top_lang | English: 7,381 (73.43%) | 2,671 (26.57%)
+
+None of the categories has equally represented classes. AU, Drama, and English have the largest individual class counts; only English exceeds all other classes combined. They are favored in representation, which does not by itself prove prediction bias. Small classes provide fewer examples to learn from and less stable evaluation estimates. Overall metrics can obscure their errors, so subgroup counts and rates must be examined together.
+
+3. Overall model performance
+
+For 2,011 test movies, TPR = 69.74%, FPR = 28.45%, and SR = 48.73%. Accuracy is 70.66%. The confusion counts are TP = 689, FN = 299, FP = 291, and TN = 732. High and low test counts are 988 and 1,023. The model uses k = 15, chosen by five-fold cross-validation within the 8,041 training movies, with the supplied 80/20 split and seed 45. This is a new k selection because no earlier movie-model k was supplied.
+
+4. Group performance and fairness ratios
+
+Each comparison uses the most prevalent individual class versus all other classes pooled together. Rates use test data; the representation counts in Question 2 use the full dataset.
+
+Group | Test n | TPR | FPR | SR
+AU | 1000 | 74.77% | 36.30% | 57.50%
+Other countries | 1011 | 63.39% | 22.30% | 40.06%
+English | 1478 | 67.68% | 26.37% | 45.74%
+Other languages | 533 | 74.58% | 35.29% | 57.04%
+Drama | 373 | 83.20% | 53.49% | 72.92%
+Other genres | 1638 | 65.32% | 24.83% | 43.22%
+
+Comparison | DPR | EOR
+AU vs. other countries | 0.697 | 0.614
+English vs. other languages | 0.802 | 0.747
+Drama vs. other genres | 0.593 | 0.464
+
+Country. Compared with overall performance, AU has a TPR 5.04 percentage points higher, an FPR 7.86 points higher, and an SR 8.77 points higher. Other countries are 6.35, 6.15, and 8.67 points lower, respectively. The model finds more high-scoring AU movies, but also makes more false high predictions for AU. DPR = 0.697 means the other-country selection rate is about 69.7% of AU's. EOR = 0.614 is driven by the FPR gap: other countries have about 61.4% of AU's false-alarm rate. These ratios show unequal selection and error rates.
+
+Language. English is below overall TPR, FPR, and SR by 2.06, 2.08, and 2.99 percentage points. Other languages are above overall by 4.84, 6.85, and 8.30 points. English movies receive fewer positive predictions and have fewer false alarms, but the model also misses a larger share of their actually high-scoring movies. DPR = 0.802 means English's selection rate is about 80.2% of the other-language rate. EOR = 0.747 reflects English's lower FPR relative to other languages. This comparison is closer to parity than the other two, but is still unequal.
+
+Genre. Drama is above overall TPR, FPR, and SR by 13.46, 25.04, and 24.19 percentage points. Other genres are below by 4.41, 3.61, and 5.51 points. High-scoring dramas are found more often, but 53.49% of low-scoring dramas are also labeled high, compared with 24.83% for other genres. DPR = 0.593 means other genres are selected at about 59.3% of Drama's rate. EOR = 0.464 is driven by the FPR difference. Genre has the largest observed disparity in both ratios.
+
+5. Does the model perform fairly for all movie types?
+
+I do not think we can call the model fair across all movie types. The selection and error rates differ in all three comparisons, especially for genre. English is the most common language, but the model selects English movies less often and misses more of the ones that actually have high scores. The gaps show where performance differs, although they do not explain why. Actual score distributions differ between groups, and results from one test split may change with a different sample. Combining many classes into an "other" group can also hide problems within that group. We would need to check individual classes and combinations, such as language within genre, before making a claim about every movie type.
+
+6. Recommendation to the studio head
+
+I would not rely on this model to allocate advertising budgets across movie types or award categories. It finds about 70 of every 100 genuinely high-scoring films overall, so it misses about 30. Its false-alarm rate is much higher for dramas than other genres (53.49% versus 24.83%), which could skew spending. Other genres are recommended at about 59% of the rate for dramas (DPR = 0.593). Their false-alarm rate is about 46% of the drama rate (EOR = 0.464), so the model makes these mistakes much more often for dramas. The model predicts a high score, not an award win, and this dataset contains no award outcome to validate that claim. Revenue is also an input; verify it is available when advertising decisions are made. I would use it to explore patterns for now and check individual groups and actual award outcomes before using it to decide budgets.
+
+7. Copilot question, response, and verification
+
+Prompt: For a binary movie-score classifier, can demographic parity ratio equal 1 while equalized odds ratio is below 1? Give a two-group confusion-matrix example, calculate both ratios using Fairlearn’s default between-groups definitions, and explain what this means for allocating movie advertising budgets.
+
+Copilot clarification: Hello Data Science Student! Before I work through the example, what have you tried so far, or what part of Fairlearn’s default ratio definitions is confusing?
+
+My follow-up: i get they compare different rates but how can selection be equal and the errors be different? can u show a small example
+
+Copilot response (as pasted): Hello Data Science Student! Yes. Selection rate is the share predicted positive; true-positive rate (TPR) is the share of actual positives correctly identified; false-positive rate (FPR) is the share of actual negatives incorrectly labeled positive.
+
+Suppose “positive” means the classifier recommends advertising a movie. Each cell below is a movie count, with rows as actual outcome and columns as predicted outcome:
+
+Group | Actual success, predicted yes | Actual success, predicted no | Actual not success, predicted yes | Actual not success, predicted no
+A | 40 | 10 | 10 | 40
+B | 20 | 30 | 30 | 20
+
+Both groups have 50 predicted “yes” out of 100, so their selection rates are each 0.5. Fairlearn’s default between-groups demographic parity ratio—the smaller selection rate divided by the larger—is therefore 0.5 / 0.5 = 1.
+
+But their error rates differ: Group A has TPR 40/50 = 0.8 and FPR 10/50 = 0.2; Group B has TPR 20/50 = 0.4 and FPR 30/50 = 0.6. Fairlearn’s default between-groups equalized odds ratio takes the worse of the TPR and FPR ratios: min(0.4/0.8, 0.2/0.6) = min(0.5, 0.33) ≈ 0.33.
+
+So both groups get the same share of movies recommended for ads, but the recommendations are less accurate for Group B: with the same spend per recommended movie, more ads go to movies that don’t succeed, and more successful movies are missed. Equal selection rates alone don’t guarantee equally effective budget allocation.
+
+Verification: I can verify the formulas and arithmetic. Both groups have 50 predicted positives out of 100, so DPR = 1. Their TPR ratio is 0.4/0.8 = 0.5, and their FPR ratio is 0.2/0.6 = 1/3; EOR is therefore 1/3, or about 0.33. The notebook independently recreates these counts and checks the Fairlearn outputs against this arithmetic. The mathematical explanation is correct. In this lab, however, the target is a high movie score, so its references to "success" should mean high scores, not proven award wins or advertising returns. The budget interpretation assumes the same spending per selected movie; the example does not establish actual budget effects.
+
+Takeaway
+
+Check the groups – The model had about 71% accuracy overall, but that number left out the big difference in false alarms between dramas and other genres. Looking at each group helped me see why accuracy alone would be a weak reason to recommend the model. I also learned that being the largest class does not mean the model will predict that class better, since English movies had a lower true positive rate than other languages. In DS1001, we study how bias and error can enter a project, and this lab gave me a way to check those problems in the predictions. For future projects, I want to compare the errors across groups and check that the outcome I am predicting fits the decision someone wants to make.
+
+Notes
+
+Codespaces setup: Upload the completed notebook and CSV to your DS1001 Codespace. Activate the virtual environment from LABS-04 in the terminal, using source ArnavKhanna_env/bin/activate. In the notebook kernel selector, choose the same environment. Run pip install fairlearn, then pip freeze > requirements.txt in the terminal. The requirements file records the course environment used to run this notebook.
+
+Keep the CSV in the same folder as the notebook, select the right Python environment, install the packages in requirements.txt, and run the cells in order. Confirm low = 0 and high = 1; inspect missing values and label spellings. The CSV uses a leading space in language labels, so group comparisons strip it while the model encoding is retained. Keep the supplied split fixed and choose k on training folds only. The source data already has scaled numeric columns; how those scales were fitted is unknown. Check that preprocessing and prediction-time features do not leak information.
+
+Check TP, FN, FP, TN and the number of actual high and low scores in each group before interpreting the rates. Use counts from the full dataset for representation and held-out predictions for evaluation. Read the group table to determine direction: a ratio alone does not identify the group with the larger rate. Before a final project, add individual and intersecting group checks and uncertainty estimates. GitHub save steps: save the notebook, use git status to check the changed files, then git add the notebook, CSV if needed, and requirements.txt. Commit them with a short message and run git push. Check the repository on GitHub to confirm the latest notebook outputs and requirements are visible. Use the course environment for execution and check that the notebook and requirements appear on GitHub after pushing.

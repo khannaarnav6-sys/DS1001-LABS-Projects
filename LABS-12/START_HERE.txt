@@ -1,0 +1,9 @@
+LABS-12: Value - Arnav Khanna
+
+The report contains three pages of answers and takeaway plus one page of notes, excluded from the main page limit.
+The notebook was executed in GitHub Codespaces using ArnavKhanna_env. All 22 code cells passed, and results match the report.
+See codespace_execution.json for execution details. Both requirements files record the course environment.
+Keep the CSV beside the notebook. Rerun with python LABS-12/run_codespace.py from the repository root after activating ArnavKhanna_env.
+The actual Copilot exchange is included and its arithmetic is checked independently.
+Review the personal takeaway before submitting. No Canvas submission was performed.
+The previous movie-model k was unavailable; k=15 was selected with training-only five-fold cross-validation.

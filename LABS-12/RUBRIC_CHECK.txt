@@ -1,0 +1,81 @@
+LABS-12 RUBRIC CHECK - November 20, 2026
+
+STATUS
+The written report covers the listed content and formatting requirements. All 22 notebook code cells were executed in GitHub Codespaces using ArnavKhanna_env with no errors. The selected k, overall results, subgroup results, and fairness ratios match the report baseline. Requirements were frozen from the course environment. GitHub history provides the commit and push record. A previous movie-model k was unavailable, so the disclosed training-only selection of k=15 remains a method difference from literally reusing that previous model.
+
+FORMATTING
+PASS: PDF format.
+PASS: Main responses and takeaway occupy pages 1-3. Page 4 contains only Notes, explicitly excluded from the rubric page limit.
+PASS: Lab name, student name, course, and date are present.
+PASS: Required Questions, Takeaway, and Notes headings are present.
+PASS: Answers are numbered 1-7 to match the seven top-level question blocks. The notebook and rubric contain inconsistent internal question-number references; all actual question content is addressed.
+PASS: Plain black-grid tables; only numbered question headings are bold. No italic text or subscripts in the report. No sources section or Questions continued headings.
+
+QUESTION 1 - FIVE METRICS
+PASS: TPR, FPR, SR, DPR, EOR each have a definition, equation, range, and movie/budget implication.
+PASS: Distinguishes prediction quality from fairness. TPR=1 and FPR=0 are performance ideals, not by themselves proof of group fairness. DPR/EOR=1 indicate equality under those criteria, not proof of every form of fairness. Zero-denominator caveat included.
+PASS: TP, FP, FN, TN, N and g are explained.
+
+QUESTION 2 - REPRESENTATION
+PASS: Country, top_genre, top_lang are addressed.
+PASS: Identifies unequal representation and AU, Drama, English as the largest individual classes.
+PASS: Provides their counts and percentages, and the pooled remaining counts and percentages.
+PASS: Explains effects on learning, subgroup estimate stability, and hidden errors in overall metrics.
+
+QUESTION 3 - OVERALL METRICS
+PASS: TPR=69.74%, FPR=28.45%, SR=48.73%.
+PASS: Confusion counts and test count supplied, plus accuracy and model-selection explanation.
+
+QUESTION 4 - CATEGORY METRICS AND COMPARISONS
+PASS: Each of six groups has test count, TPR, FPR, SR.
+PASS: All three rates for both groups in each category are compared numerically with the overall rates in percentage points.
+PASS: DPR and EOR supplied for each category.
+PASS: Ratios are interpreted with direction and their relevant group rates, including whether the model detects or falsely selects more movies.
+
+QUESTION 5 - FAIRNESS CONCLUSION
+PASS: Clear conclusion supported by measured gaps. Discusses genre, language, sample uncertainty, actual score distributions, and pooled groups hiding individual-class differences.
+
+QUESTION 6 - STUDIO RECOMMENDATION
+PASS: Clear recommendation against relying on this model for advertising budgets and awards across categories.
+PASS: Uses measured detection, false-alarm, selection and fairness values.
+PASS: Explains implications in ordinary language, including other genres selected at about 59% of the drama rate and their false alarms at about 46% of the drama rate.
+PASS: Explains that predicting high scores does not validate award wins, and flags whether revenue would be available when budgets are decided.
+
+QUESTION 7 - COPILOT
+PASS: Includes the user-supplied prompt, Copilot clarification, user follow-up, complete substantive Copilot response and table, and the student's verification explanation.
+PASS: Distinguishes hypothetical example from real movie analysis.
+PASS: Independent arithmetic and Fairlearn calls agree: DPR=1, EOR=1/3, approximately 0.33.
+PASS: Explains why the arithmetic is correct and why the word success does not establish award wins or advertising effects.
+PROVENANCE: Actual exchange pasted by the user after asking in the Codespace. The response wording is retained; emphasis formatting is removed.
+
+TAKEAWAY
+PASS: One paragraph, exactly five sentences.
+PASS: Short kernel followed by the required dash: Check the groups – ...
+PASS: Summarizes learning from actual results, explains DS1001 bias/error connection, and states how the student's approach will change on future projects.
+REVIEW: Student should confirm it reflects their personal experience.
+
+NOTES
+PASS: Includes placement of data, environment/kernel activation, installation and freeze commands, score encoding, language-label spacing, fixed split, training-only k selection, subgroup denominators, preprocessing/timing cautions, and GitHub save steps.
+PASS: Notes occupy page 4, outside the main three-page response limit.
+
+FIGURES / SCREENSHOTS
+NOT APPLICABLE: The report contains live text and tables, with no screenshots, photographs, or plotted figures. The rubric specifies how screenshots/figures must be formatted if used; it does not separately request a particular screenshot. Therefore no image requiring an IEEE caption or visible GitHub handle is included. Notebook chart outputs remain in the notebook, not as figures in the PDF.
+
+COMPUTATIONAL CHECKS
+PASS: Original CSV matches working CSV. Full dataset has 10,052 rows and no missing values.
+PASS: Test row indices match the supplied 80/20 split with random seed 45; actual labels match CSV.
+PASS: Recomputed overall confusion counts: TP689, FN299, FP291, TN732.
+PASS: Recomputed all six subgroup confusion matrices, all subgroup rates, and all six fairness ratios against saved results.
+PASS: Representation counts and most prevalent classes verified against CSV.
+PASS: k=15 maximizes saved mean five-fold training cross-validation accuracy among tested candidates.
+PASS: Notebook format valid, all 22 code cells executed, no error outputs.
+PASS: Final PDF rendered and visually inspected for table legibility, page breaks, clipping, font styles and formula notation.
+
+COURSE WORKFLOW
+PASS: Notebook and data uploaded to the course Codespace.
+PASS: ArnavKhanna_env used for both terminal and notebook execution.
+PASS: All 22 code cells completed; results independently checked against report.
+PASS: Requirements frozen from that environment.
+GitHub commit/push: check the repository history.
+Canvas submission was not performed.
+Method difference: no previous movie-model k was supplied; k=15 was selected on training folds and disclosed.
