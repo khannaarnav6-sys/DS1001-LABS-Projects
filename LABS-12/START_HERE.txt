@@ -6,4 +6,4 @@ See codespace_execution.json for execution details. Both requirements files reco
 Keep the CSV beside the notebook. Rerun with python LABS-12/run_codespace.py from the repository root after activating ArnavKhanna_env.
 The actual Copilot exchange is included and its arithmetic is checked independently.
 Review the personal takeaway before submitting. No Canvas submission was performed.
-The previous movie-model k was unavailable; k=15 was selected with training-only five-fold cross-validation.
+k=25 is reused from the best tested value in LABS_10_Analytics.ipynb. Use a fresh holdout for future final validation.

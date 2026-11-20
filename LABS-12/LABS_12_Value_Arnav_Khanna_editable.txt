@@ -29,30 +29,30 @@ None of the categories has equally represented classes. AU, Drama, and English h
 
 3. Overall model performance
 
-For 2,011 test movies, TPR = 69.74%, FPR = 28.45%, and SR = 48.73%. Accuracy is 70.66%. The confusion counts are TP = 689, FN = 299, FP = 291, and TN = 732. High and low test counts are 988 and 1,023. The model uses k = 15, chosen by five-fold cross-validation within the 8,041 training movies, with the supplied 80/20 split and seed 45. This is a new k selection because no earlier movie-model k was supplied.
+For 2,011 test movies, TPR = 68.42%, FPR = 26.69%, and SR = 47.19%. Accuracy is 70.91%. The confusion counts are TP = 676, FN = 312, FP = 273, and TN = 750. High and low test counts are 988 and 1,023. The model uses k = 25, which had the highest tested accuracy in the earlier LABS_10_Analytics.ipynb comparison. The supplied 80/20 split and seed 45 are unchanged, with 8,041 movies used for training. The Lab 12 template refers to the earlier Analytics activity as LABS-9.
 
 4. Group performance and fairness ratios
 
 Each comparison uses the most prevalent individual class versus all other classes pooled together. Rates use test data; the representation counts in Question 2 use the full dataset.
 
 Group | Test n | TPR | FPR | SR
-AU | 1000 | 74.77% | 36.30% | 57.50%
-Other countries | 1011 | 63.39% | 22.30% | 40.06%
-English | 1478 | 67.68% | 26.37% | 45.74%
-Other languages | 533 | 74.58% | 35.29% | 57.04%
-Drama | 373 | 83.20% | 53.49% | 72.92%
-Other genres | 1638 | 65.32% | 24.83% | 43.22%
+AU | 1000 | 74.41% | 34.08% | 56.30%
+Other countries | 1011 | 60.87% | 20.91% | 38.18%
+English | 1478 | 66.81% | 25.10% | 44.65%
+Other languages | 533 | 72.20% | 31.93% | 54.22%
+Drama | 373 | 81.97% | 53.49% | 72.12%
+Other genres | 1638 | 63.98% | 22.82% | 41.51%
 
 Comparison | DPR | EOR
-AU vs. other countries | 0.697 | 0.614
-English vs. other languages | 0.802 | 0.747
-Drama vs. other genres | 0.593 | 0.464
+AU vs. other countries | 0.678 | 0.614
+English vs. other languages | 0.824 | 0.786
+Drama vs. other genres | 0.576 | 0.427
 
-Country. Compared with overall performance, AU has a TPR 5.04 percentage points higher, an FPR 7.86 points higher, and an SR 8.77 points higher. Other countries are 6.35, 6.15, and 8.67 points lower, respectively. The model finds more high-scoring AU movies, but also makes more false high predictions for AU. DPR = 0.697 means the other-country selection rate is about 69.7% of AU's. EOR = 0.614 is driven by the FPR gap: other countries have about 61.4% of AU's false-alarm rate. These ratios show unequal selection and error rates.
+Country. AU is above the overall TPR, FPR, and SR by 5.99, 7.39, 9.11 percentage points, respectively. Other countries are below overall by 7.55, 5.78, 9.01 points. The model finds more high-scoring AU movies but also labels more low-scoring AU movies as high. DPR = 0.678 means other countries are selected at about 67.8% of the AU rate. EOR = 0.614 is driven by the FPR gap: other countries have about 61.4% of the AU false-alarm rate. Selection and error rates are unequal.
 
-Language. English is below overall TPR, FPR, and SR by 2.06, 2.08, and 2.99 percentage points. Other languages are above overall by 4.84, 6.85, and 8.30 points. English movies receive fewer positive predictions and have fewer false alarms, but the model also misses a larger share of their actually high-scoring movies. DPR = 0.802 means English's selection rate is about 80.2% of the other-language rate. EOR = 0.747 reflects English's lower FPR relative to other languages. This comparison is closer to parity than the other two, but is still unequal.
+Language. English is below overall TPR, FPR, and SR by 1.61, 1.59, 2.54 percentage points. Other languages are above overall by 3.78, 5.25, 7.03 points. English movies receive fewer positive predictions and have fewer false alarms, but the model also misses more of their actually high-scoring movies. DPR = 0.824 means English movies are selected at about 82.4% of the other-language rate. EOR = 0.786 reflects the lower English FPR. Language is closer to parity than country or genre, although the rates still differ.
 
-Genre. Drama is above overall TPR, FPR, and SR by 13.46, 25.04, and 24.19 percentage points. Other genres are below by 4.41, 3.61, and 5.51 points. High-scoring dramas are found more often, but 53.49% of low-scoring dramas are also labeled high, compared with 24.83% for other genres. DPR = 0.593 means other genres are selected at about 59.3% of Drama's rate. EOR = 0.464 is driven by the FPR difference. Genre has the largest observed disparity in both ratios.
+Genre. Drama is above overall TPR, FPR, and SR by 13.55, 26.80, 24.93 percentage points. Other genres are below overall by 4.44, 3.87, 5.68 points. High-scoring dramas are found more often, but 53.49% of low-scoring dramas are also labeled high, compared with 22.82% of other genres. DPR = 0.576 means other genres are selected at about 57.6% of the Drama rate. EOR = 0.427 is driven by the FPR gap. Genre has the largest disparity in both ratios.
 
 5. Does the model perform fairly for all movie types?
 
@@ -60,7 +60,7 @@ I do not think we can call the model fair across all movie types. The selection 
 
 6. Recommendation to the studio head
 
-I would not rely on this model to allocate advertising budgets across movie types or award categories. It finds about 70 of every 100 genuinely high-scoring films overall, so it misses about 30. Its false-alarm rate is much higher for dramas than other genres (53.49% versus 24.83%), which could skew spending. Other genres are recommended at about 59% of the rate for dramas (DPR = 0.593). Their false-alarm rate is about 46% of the drama rate (EOR = 0.464), so the model makes these mistakes much more often for dramas. The model predicts a high score, not an award win, and this dataset contains no award outcome to validate that claim. Revenue is also an input; verify it is available when advertising decisions are made. I would use it to explore patterns for now and check individual groups and actual award outcomes before using it to decide budgets.
+I would not rely on this model to allocate advertising budgets across movie types or award categories. It finds about 68 of every 100 genuinely high-scoring films overall, so it misses about 32. Its false-alarm rate is much higher for dramas than other genres (53.49% versus 22.82%), which could skew spending. Other genres are recommended at about 58% of the Drama rate (DPR = 0.576). Their false-alarm rate is about 43% of the Drama rate (EOR = 0.427). The model predicts high scores, and this dataset has no award outcome to check whether it predicts award wins. Revenue is also an input; verify it is available when advertising decisions are made. I would use the model to explore patterns for now and check individual groups and actual award outcomes before using it to decide budgets.
 
 7. Copilot question, response, and verification
 
@@ -92,8 +92,8 @@ Check the groups – The model had about 71% accuracy overall, but that number l
 
 Notes
 
-Codespaces setup: Upload the completed notebook and CSV to your DS1001 Codespace. Activate the virtual environment from LABS-04 in the terminal, using source ArnavKhanna_env/bin/activate. In the notebook kernel selector, choose the same environment. Run pip install fairlearn, then pip freeze > requirements.txt in the terminal. The requirements file records the course environment used to run this notebook.
+Codespaces setup: Upload the completed notebook and CSV to your DS1001 Codespace. Activate the virtual environment from LABS-04 in the terminal, using source ArnavKhanna_env/bin/activate. In the notebook kernel selector, choose the same environment. Run pip install fairlearn, then pip freeze &gt; requirements.txt in the terminal. The requirements file records the course environment used to run this notebook.
 
-Keep the CSV in the same folder as the notebook, select the right Python environment, install the packages in requirements.txt, and run the cells in order. Confirm low = 0 and high = 1; inspect missing values and label spellings. The CSV uses a leading space in language labels, so group comparisons strip it while the model encoding is retained. Keep the supplied split fixed and choose k on training folds only. The source data already has scaled numeric columns; how those scales were fitted is unknown. Check that preprocessing and prediction-time features do not leak information.
+Keep the CSV in the same folder as the notebook, select the right Python environment, install the packages in requirements.txt, and run the cells in order. Confirm low = 0 and high = 1; inspect missing values and label spellings. The CSV uses a leading space in language labels, so group comparisons strip it while the model encoding is retained. Reuse k = 25 from the earlier Analytics notebook and keep the supplied split fixed. That earlier choice used test accuracy, so the test set was part of model selection; future evaluation should use a fresh holdout and choose k on training folds. The source data already has scaled numeric columns; how those scales were fitted is unknown. Check that preprocessing and prediction-time features do not leak information.
 
 Check TP, FN, FP, TN and the number of actual high and low scores in each group before interpreting the rates. Use counts from the full dataset for representation and held-out predictions for evaluation. Read the group table to determine direction: a ratio alone does not identify the group with the larger rate. Before a final project, add individual and intersecting group checks and uncertainty estimates. GitHub save steps: save the notebook, use git status to check the changed files, then git add the notebook, CSV if needed, and requirements.txt. Commit them with a short message and run git push. Check the repository on GitHub to confirm the latest notebook outputs and requirements are visible. Use the course environment for execution and check that the notebook and requirements appear on GitHub after pushing.
